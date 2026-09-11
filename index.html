@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandy's 分類 Spell! 🌟</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 sm:p-8">
+
+    <header class="w-full max-w-5xl flex justify-center items-center mb-8 relative z-20">
+        <div class="text-center w-full flex flex-col items-center">
+            <!-- Audio Button for Title -->
+            <button type="button" class="speaker-btn text-yellow-400 hover:text-white mb-2" data-text="Sandy's Sorting Spell">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            </button>
+            <h1 class="text-5xl sm:text-6xl text-yellow-300 drop-shadow-lg mb-2">Sandy's 分類 Spell! 🌟</h1>
+        </div>
+    </header>
+
+    <div class="w-full max-w-5xl relative">
+        <canvas id="connections-canvas"></canvas>
+        
+        <div class="flex flex-col md:flex-row gap-8 mb-12 items-end relative z-20">
+            
+            <div class="w-full md:w-1/3 flex flex-col items-center">
+                <!-- Witch Art Updated to WebP -->
+                <img src="assets/sandy-front-woodwand.webp" alt="Sandy the Witch" class="mb-4 h-64 object-contain drop-shadow-2xl pointer-events-none">
+
+                <div class="spellbook p-6 w-full max-w-sm z-30">
+                    <div class="flex flex-col items-center mb-4">
+                        <button type="button" class="speaker-btn text-purple-600 hover:text-purple-900 mb-1" data-text="The Potion Sort Spell">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                        <h2 class="text-2xl text-purple-800 font-bold text-center">📖 The Potion Sort Spell</h2>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 text-lg font-bold text-gray-700">
+                            <span class="text-3xl text-red-500 mt-4">↑</span>
+                            <div class="flex flex-col items-start">
+                                <button type="button" class="speaker-btn text-blue-500 hover:text-blue-700 mb-1" data-text="Put the BIG potion up.">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                    </svg>
+                                </button>
+                                <span>Put the <span class="text-xl text-black">BIG</span> potion <span class="text-purple-700 uppercase">up</span>.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 text-lg font-bold text-gray-700">
+                            <span class="text-3xl text-blue-500 mt-4">↓</span>
+                            <div class="flex flex-col items-start">
+                                <button type="button" class="speaker-btn text-blue-500 hover:text-blue-700 mb-1" data-text="Put the small potion down.">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                    </svg>
+                                </button>
+                                <span>Put the <span class="text-sm text-black">small</span> potion <span class="text-purple-700 uppercase">down</span>.</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="text-sm text-gray-500 mt-4 font-bold text-center">(拖曳藥水來分類！)</p>
+                </div>
+            </div>
+
+            <!-- Bookshelves -->
+            <div class="w-full md:w-2/3 flex flex-col gap-10">
+                <div id="shelf-top" class="shelf h-40 rounded-lg flex items-end justify-center px-4 pb-2 drop-zone" data-target="big">
+                    <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-yellow-900 font-bold px-6 py-2 rounded-t-lg border-t-4 border-l-4 border-r-4 border-yellow-600 shadow-md flex flex-col items-center z-10">
+                        <button type="button" class="speaker-btn text-yellow-800 hover:text-purple-800" data-text="UP">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                        <div class="flex items-center gap-1">
+                            <span class="text-xl">UP</span>
+                            <span class="text-2xl">↑</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="shelf-bottom" class="shelf h-32 rounded-lg flex items-end justify-center px-4 pb-2 drop-zone" data-target="small">
+                    <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-yellow-900 font-bold px-6 py-2 rounded-t-lg border-t-4 border-l-4 border-r-4 border-yellow-600 shadow-md flex flex-col items-center z-10">
+                        <button type="button" class="speaker-btn text-yellow-800 hover:text-purple-800" data-text="DOWN">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                            </svg>
+                        </button>
+                        <div class="flex items-center gap-1">
+                            <span class="text-xl">DOWN</span>
+                            <span class="text-2xl">↓</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Potions Area (Fully updated to .webp and assets/ paths) -->
+        <div class="bg-[#1E1136] p-6 rounded-2xl border-4 border-purple-900 shadow-inner mb-12 relative z-20">
+            <div class="flex flex-col items-center mb-6">
+                <button type="button" class="speaker-btn text-yellow-400 hover:text-white mb-1" data-text="Put the potions away!">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+                <h3 class="magic-font text-3xl text-yellow-300 text-center">Put the potions away!</h3>
+            </div>
+            
+            <div id="potion-container" class="flex flex-wrap justify-center gap-6 sm:gap-12 min-h-[150px] items-end">
+                <div class="potion" draggable="true" data-size="big" id="potion-red" data-color="red">
+                    <img src="assets/potion-red-withtag.webp" alt="Big Red Potion" class="h-28 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="small" id="potion-blue" data-color="blue">
+                    <img src="assets/potion-blue-withtag.webp" alt="Small Blue Potion" class="h-16 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="big" id="potion-green" data-color="green">
+                    <img src="assets/potion-green-with-dark-green-glass-withtag.webp" alt="Big Green Potion" class="h-28 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="small" id="potion-purple" data-color="purple">
+                    <img src="assets/potion-purple-to-pink-withtag.webp" alt="Small Purple Potion" class="h-16 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="small" id="potion-yellow" data-color="yellow">
+                    <img src="assets/potion-orange-to-yellow-withtag.webp" alt="Small Yellow Potion" class="h-16 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="big" id="potion-orange" data-color="orange">
+                    <img src="assets/potion-orange-withtag.webp" alt="Big Orange Potion" class="h-28 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="big" id="potion-black" data-color="black">
+                    <img src="assets/potion-thick-black-withtag.webp" alt="Big Black Potion" class="h-28 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+                <div class="potion" draggable="true" data-size="small" id="potion-pink" data-color="pink">
+                    <img src="assets/potion-magenta-withtag.webp" alt="Small Pink Potion" class="h-16 w-auto pointer-events-none drop-shadow-xl">
+                </div>
+            </div>
+        </div>
+
+        <!-- Bonus Maze Challenge -->
+        <div class="bg-gradient-to-r from-purple-900 to-indigo-900 p-1 rounded-2xl shadow-xl relative z-20 border-2 border-yellow-400">
+            <div class="bg-[#2D1B4E] rounded-xl p-6 sm:p-8 relative overflow-hidden">
+                <div class="absolute -top-4 -right-4 text-gray-500 opacity-20 pointer-events-none">
+                    <svg width="100" height="100" viewBox="0 0 24 24" fill="currentColor"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.49-0.12-0.61L19.14,12.94Z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg>
+                </div>
+
+                <h3 class="magic-font text-3xl text-center text-yellow-300 mb-6">⭐ 挑戰任務！你會寫程式嗎？ ⭐</h3>
+                
+                <div class="flex flex-col items-center mb-6">
+                    <button type="button" class="speaker-btn text-yellow-400 hover:text-white mb-2" data-text="YELLOW! Go to the YELLOW potion!">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                        </svg>
+                    </button>
+                    <p class="text-center text-xl">YELLOW! Go to the <strong class="text-yellow-400">YELLOW</strong> potion!</p>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div class="bg-gray-900 bg-opacity-50 p-6 rounded-xl border border-purple-500 text-center">
+                        <p class="mb-3 font-bold text-gray-300">控制方向：</p>
+                        <div class="flex gap-2 justify-center">
+                            <button class="code-block arrow-btn hover:bg-purple-500 hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer" data-dx="-1" data-dy="0">←</button>
+                            <button class="code-block arrow-btn hover:bg-purple-500 hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer" data-dx="0" data-dy="-1">↑</button>
+                            <button class="code-block arrow-btn hover:bg-purple-500 hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer" data-dx="0" data-dy="1">↓</button>
+                            <button class="code-block arrow-btn hover:bg-purple-500 hover:scale-110 active:scale-95 transition-all shadow-lg cursor-pointer" data-dx="1" data-dy="0">→</button>
+                        </div>
+                        <p class="mt-4 text-sm text-gray-400">點擊箭頭移動！</p>
+                        <button id="reset-maze" class="mt-4 bg-purple-600 hover:bg-purple-500 text-white font-bold py-2 px-6 rounded transition-colors text-lg shadow-md">🔄 重新開始</button>
+                    </div>
+
+                    <div class="maze-grid w-64 h-64" id="maze">
+                        <div class="maze-cell" data-x="0" data-y="0"></div>
+                        <div class="maze-cell" data-x="1" data-y="0"></div>
+                        <div class="maze-cell" data-x="2" data-y="0"></div>
+                        <div class="maze-cell obstacle" data-x="0" data-y="1">
+                            <svg width="40" height="30" viewBox="0 0 40 30">
+                                <path d="M5,25 L15,10 L30,5 L35,15 L30,25 Z" fill="#6B7280" />
+                                <path d="M10,28 L20,15 L35,15 L38,25 Z" fill="#4B5563" />
+                            </svg>
+                        </div>
+                        <div class="maze-cell" data-x="1" data-y="1"></div>
+                        <div class="maze-cell" data-x="2" data-y="1" id="maze-goal">
+                            <!-- Maze Goal Potion Updated -->
+                            <img src="assets/potion-brown-to-yellow-withtag.webp" alt="Goal Potion" class="h-12 w-auto drop-shadow-xl pointer-events-none">
+                        </div>
+                        <div class="maze-cell path" data-x="0" data-y="2" id="maze-start">
+                            <svg id="snail-svg" width="40" height="30" viewBox="0 0 50 40" style="transition: all 0.3s;" class="pointer-events-none">
+                                <path d="M10,30 Q20,20 40,30 Q45,35 40,35 L10,35 Q5,35 10,30 Z" fill="#FDE047" />
+                                <circle cx="25" cy="20" r="15" fill="#F59E0B" stroke="#B45309" stroke-width="2" />
+                                <path d="M25,5 A15,15 0 0,1 40,20" fill="none" stroke="#D97706" stroke-width="3" />
+                                <path d="M20,10 A10,10 0 0,1 35,20" fill="none" stroke="#D97706" stroke-width="3" />
+                                <path d="M20,15 A5,5 0 0,1 30,20" fill="none" stroke="#D97706" stroke-width="3" />
+                                <line x1="38" y1="28" x2="45" y2="20" stroke="#FDE047" stroke-width="2" />
+                                <line x1="40" y1="29" x2="48" y2="25" stroke="#FDE047" stroke-width="2" />
+                                <circle cx="45" cy="20" r="2" fill="#111" />
+                                <circle cx="48" cy="25" r="2" fill="#111" />
+                            </svg>
+                        </div>
+                        <div class="maze-cell" data-x="1" data-y="2"></div>
+                        <div class="maze-cell obstacle" data-x="2" data-y="2">
+                            <svg width="40" height="40" viewBox="0 0 40 40" stroke="#9CA3AF" stroke-width="1" fill="none" opacity="0.5">
+                                <line x1="0" y1="0" x2="40" y2="40" />
+                                <line x1="20" y1="0" x2="20" y2="40" />
+                                <line x1="40" y1="0" x2="0" y2="40" />
+                                <line x1="0" y1="20" x2="40" y2="20" />
+                                <circle cx="20" cy="20" r="10" />
+                                <circle cx="20" cy="20" r="18" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals and Scripts -->
+    <div id="message-box" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-gray-800 p-8 rounded-2xl max-w-sm text-center shadow-2xl border-4 border-yellow-400 transform transition-transform scale-95" id="message-content">
+            <h2 id="msg-title" class="magic-font text-4xl mb-4 text-purple-700">Message</h2>
+            <p id="msg-text" class="text-lg mb-6"></p>
+            <button id="msg-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full text-xl shadow-md">OK!</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
